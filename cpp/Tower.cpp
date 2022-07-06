@@ -1,25 +1,31 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void towerOfHanoi(int n, char from_rod,
-          char to_rod, char aux_rod)
-{
-  if (n == 0)
-  {
-    return;
-  }
-  towerOfHanoi(n - 1, from_rod, aux_rod, to_rod);
-  cout << "Move disk " << n << " from rod " << from_rod <<
-                " to rod " << to_rod << endl;
-  towerOfHanoi(n - 1, aux_rod, to_rod, from_rod);
+void TOH(int n, int s, int d, int h, int &count){
+    count++;
+    
+    //base case
+    if(n==0){
+        return;
+    }
+    
+    //rec case
+    TOH(n-1,s,h,d,count);
+    
+    cout<<"move "<<n<<" plate(s) from "<<s<<" to "<<d<<endl;
+    
+    TOH(n-1,h,d,s,count);
 }
 
-// Driver code
+
 int main()
 {
-  int n = 4; // Number of disks
-  towerOfHanoi(n, 'A', 'C', 'B'); // A, B and C are names of rods
-  return 0;
-}
+    int n=3;
+    int s=1, h=2, d=3;
+    int count=0;
+    
+    TOH(n,s,h,d,count);
+    cout<<endl<<count;
 
-// This is code is contributed by rathbhupendra
+    return 0;
+}
